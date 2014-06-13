@@ -1,7 +1,8 @@
 {
     "name": "gcrico/swift-mailer-psr-logger-plugin",
     "description": "Logs swift mailer activity with a (PSR-3) logger.",
-
+    "keywords": ["swift", "mailer", "swiftmailer", "psr", "log", "logging"],
+    "homepage": "https://github.com/gcrico/swift-mailer-psr-logger-plugin",
     "license": "MIT",
     "authors": [
         {
