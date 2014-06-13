@@ -3,7 +3,7 @@ swift-mailer-psr-logger-plugin
 
 Logs swift mailer activity with a (PSR-3) logger.
 
-There are [https://packagist.org/search/?q=psr/log](several psr/log implementations) out there.
+There are [several psr/log implementations](https://packagist.org/search/?q=psr/log) out there.
 
 
 
@@ -82,6 +82,6 @@ Let's extends the mailer service:
     });
 
 
-**Warning!** The logger provider must not sends emails with the mailer it is logging, or you will run in a dead loop!
+**Warning!** The logger must NOT send emails with the same mailer it is logging, or you will run in a dead loop!
 
 
