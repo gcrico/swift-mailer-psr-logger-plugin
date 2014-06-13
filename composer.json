@@ -1,0 +1,22 @@
+{
+    "name": "gcrico/swift-mailer-psr-logger-plugin",
+    "description": "Logs swift mailer activity with a (PSR-3) logger.",
+
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guillaume Crico",
+            "email": "guillaume.crico@gmail.com"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "~5.2",
+        "psr/log": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "gcrico/SwiftMailerPsrLoggerPlugin": "src"
+        }
+    }
+
+}
