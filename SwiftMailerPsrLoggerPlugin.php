@@ -79,7 +79,10 @@ class SwiftMailerPsrLoggerPlugin implements
      */
     private function log($level, $message, array $context = array())
     {
-        $this->logger->log($level, $this->prefix . $message, $context);
+        // Using a falsy level disables logging
+        if ($level) {
+            $this->logger->log($level, $this->prefix . $message, $context);
+        }
     }
 
     /**

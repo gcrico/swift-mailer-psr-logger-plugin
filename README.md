@@ -50,6 +50,16 @@ You can change the default log levels:
     $mailer_logger = new SwiftMailerPsrLoggerPlugin($logger, $mailer_log_levels);
 
 
+You can disable logging of some events, using a falsy value for the level.
+
+    $mailer_log_levels =  array(
+        'commandSent'               => 0,
+        'sendPerformed.NOT_SUCCESS' => false,
+        'exceptionThrown'           => null,
+        'beforeTransportStopped'    => '',
+    );
+    $mailer_logger = new SwiftMailerPsrLoggerPlugin($logger, $mailer_log_levels);
+
 
 ## Example Usage with Silex
 
