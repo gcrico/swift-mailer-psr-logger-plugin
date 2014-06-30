@@ -70,7 +70,7 @@ $mailer_logger = new SwiftMailerPsrLoggerPlugin($logger, $mailer_log_levels);
 
 ## Example Usage with Silex
 
-This workaround is needed for Silex <= 1.2.0 (https://github.com/silexphp/Silex/issues/959 ; https://github.com/silexphp/Silex/commit/8d2140c001807d96f4438d0f9efb2f794c4200ed).
+This workaround is needed for Silex <= 1.2.0 (see https://github.com/silexphp/Silex/issues/959):
 
 ```php
 $app['swiftmailer.spooltransport'] = $app->share(function ($app) {
