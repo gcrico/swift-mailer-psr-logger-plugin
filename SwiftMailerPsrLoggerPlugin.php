@@ -65,7 +65,7 @@ class SwiftMailerPsrLoggerPlugin implements
     {
         $this->logger = $logger;
         foreach ($levels as $event => $level) {
-            $this->level[$event] = $level;
+            $this->levels[$event] = $level;
         }
     }
 
