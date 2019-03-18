@@ -4,7 +4,6 @@ namespace gcrico\SwiftMailerPsrLoggerPlugin;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
-
 /**
  * Logs swiftmailer activity with a (PSR-3) logger.
  *
@@ -28,23 +27,26 @@ class SwiftMailerPsrLoggerPlugin implements
      *
      * @var LoggerInterface
      */
-    private $logger;
+    protected $logger;
 
     /**
      * Prefix for messages.
      *
      * @var string
      */
-    private $prefix = '[MAILER] ';
+    protected $prefix = '[MAILER] ';
 
     /**
      * Map of events to log-levels.
      *
      * @var array
      */
-    private $levels = array(
+    protected $levels = array(
         'sendPerformed.SUCCESS'     => LogLevel::INFO,
+        'sendPerformed.TENTATIVE'   => LogLevel::WARNING,
         'sendPerformed.NOT_SUCCESS' => LogLevel::ERROR,
+        'sendPerformed.PENDING'     => LogLevel::DEBUG,
+        'sendPerformed.SPOOLED'     => LogLevel::DEBUG,
         'exceptionThrown'           => LogLevel::ERROR,
         'beforeSendPerformed'       => LogLevel::DEBUG,
         'commandSent'               => LogLevel::DEBUG,
@@ -77,7 +79,7 @@ class SwiftMailerPsrLoggerPlugin implements
      * @param array $context
      * @return void
      */
-    private function log($level, $message, array $context = array())
+    protected function log($level, $message, array $context = array())
     {
         // Using a falsy level disables logging
         if ($level) {
@@ -109,10 +111,22 @@ class SwiftMailerPsrLoggerPlugin implements
         $failed_recipients = $evt->getFailedRecipients();
         $message = $evt->getMessage();
 
-        if ($result === \Swift_Events_SendEvent::RESULT_SUCCESS) {
-            $level = $this->levels['sendPerformed.SUCCESS'];
-        } else {
-            $level = $this->levels['sendPerformed.NOT_SUCCESS'];
+        switch ($result){
+            case \Swift_Events_SendEvent::RESULT_PENDING:
+                $level = $this->levels['sendPerformed.PENDING'];
+                break;
+            case \Swift_Events_SendEvent::RESULT_SPOOLED:
+                $level = $this->levels['sendPerformed.SPOOLED'];
+                break;
+            case \Swift_Events_SendEvent::RESULT_TENTATIVE:
+                $level = $this->levels['sendPerformed.TENTATIVE'];
+                break;
+            case \Swift_Events_SendEvent::RESULT_SUCCESS:
+                $level = $this->levels['sendPerformed.SUCCESS'];
+                break;
+            default:
+                $level = $this->levels['sendPerformed.NOT_SUCCESS'];
+                break;
         }
 
         $this->log($level, 'MESSAGE (sendPerformed): ', array(
