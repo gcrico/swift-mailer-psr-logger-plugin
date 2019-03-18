@@ -33,16 +33,19 @@ $mailer->registerPlugin($mailer_logger);
 The default log levels are:
 
 ```php
-    'sendPerformed.SUCCESS'     => LogLevel::INFO,
+    'sendPerformed.SUCCESS' => LogLevel::INFO,
+    'sendPerformed.TENTATIVE' => LogLevel::WARNING,
     'sendPerformed.NOT_SUCCESS' => LogLevel::ERROR,
-    'exceptionThrown'           => LogLevel::ERROR,
-    'beforeSendPerformed'       => LogLevel::DEBUG,
-    'commandSent'               => LogLevel::DEBUG,
-    'responseReceived'          => LogLevel::DEBUG,
-    'beforeTransportStarted'    => LogLevel::DEBUG,
-    'transportStarted'          => LogLevel::DEBUG,
-    'beforeTransportStopped'    => LogLevel::DEBUG,
-    'transportStopped'          => LogLevel::DEBUG,
+    'sendPerformed.PENDING' => LogLevel::DEBUG,
+    'sendPerformed.SPOOLED' => LogLevel::DEBUG,
+    'exceptionThrown' => LogLevel::ERROR,
+    'beforeSendPerformed' => LogLevel::DEBUG,
+    'commandSent' => LogLevel::DEBUG,
+    'responseReceived' => LogLevel::DEBUG,
+    'beforeTransportStarted' => LogLevel::DEBUG,
+    'transportStarted' => LogLevel::DEBUG,
+    'beforeTransportStopped' => LogLevel::DEBUG,
+    'transportStopped' => LogLevel::DEBUG,
 ```
 
 You can change the default log levels:
