@@ -34,7 +34,10 @@ The default log levels are:
 
 ```php
     'sendPerformed.SUCCESS'     => LogLevel::INFO,
+    'sendPerformed.TENTATIVE'   => LogLevel::WARNING,
     'sendPerformed.NOT_SUCCESS' => LogLevel::ERROR,
+    'sendPerformed.PENDING'     => LogLevel::DEBUG,
+    'sendPerformed.SPOOLED'     => LogLevel::DEBUG,
     'exceptionThrown'           => LogLevel::ERROR,
     'beforeSendPerformed'       => LogLevel::DEBUG,
     'commandSent'               => LogLevel::DEBUG,
